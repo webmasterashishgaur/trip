@@ -18,6 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 
+import com.ixitrip.chandan.ixigotrip.fragment.HotelFragment;
+import com.ixitrip.chandan.ixigotrip.fragment.MapFragment;
+import com.ixitrip.chandan.ixigotrip.fragment.MoreFragment;
 import com.ixitrip.chandan.ixigotrip.fragment.SearchFragment;
 
 import java.util.ArrayList;
@@ -43,7 +46,10 @@ public class MainActivity  extends AppCompatActivity {
     private void setUpViewPager(ViewPager viewPager)
     {
         Adapter adapter=new Adapter(getSupportFragmentManager());
-        adapter.addFragment( SearchFragment.newInstance("abc","bcd"),"Article 1");
+        adapter.addFragment( SearchFragment.newInstance("abc","bcd"),"Search");
+        adapter.addFragment( HotelFragment.newInstance("abc","bcd"),"Hotel");
+        adapter.addFragment( MapFragment.newInstance("abc","bcd"),"Map");
+        adapter.addFragment( MoreFragment.newInstance("abc","bcd"),"More");
         viewPager.setAdapter(adapter);
     }
     @Override
