@@ -6,4 +6,5 @@
     <color name="colorAlfa">#FED89C</color>
     <color name="white">#ffffff</color>
     <color name="purple">#72059a</color>
+    <color name="grey">#ccc</color>
 </resources>

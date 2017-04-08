@@ -108,8 +108,6 @@ public class SearchInput extends Fragment implements GoogleApiClient.ConnectionC
         // Inflate the layout for this fragment
         View rootView  =inflater.inflate(R.layout.fragment_search_input, container, false);
         Button frombtn=(Button)rootView.findViewById(R.id.close);
-        Button mylocation=(Button)rootView.findViewById(R.id.button3);
-        Button onmap=(Button)rootView.findViewById(R.id.button4);
         sechinput=(EditText)rootView.findViewById(R.id.editText3) ;
        lv=(ListView)rootView.findViewById(R.id.ListView) ;
         lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -230,12 +228,7 @@ public class SearchInput extends Fragment implements GoogleApiClient.ConnectionC
           getActivity().finish();
             }
         });
-        onmap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
         return rootView;
     }
     @Override
@@ -396,6 +389,29 @@ public class SearchInput extends Fragment implements GoogleApiClient.ConnectionC
                 public void run() {
                     SearchPalceAdapter searchPalceAdapter=new SearchPalceAdapter(ctx,searchResponse.allocateLists);
                     lv.setAdapter(searchPalceAdapter);
+
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Log.d("click the station","yes"+position);
+                            String upper="Select Your City";;
+                            String lower="Select Traveling City";
+                            if(from.equals("0")) {
+
+                                lower = searchResponse.allocateLists.get(position).address;
+
+                            }else {
+                                upper= searchResponse.allocateLists.get(position).address;
+                            }
+                            Log.d("selectedaddress",""+upper);
+                            Intent in=new Intent(IntentString.SEARCH_ACTVITY);
+                            in.setFlags(in.FLAG_ACTIVITY_NEW_TASK | in.FLAG_ACTIVITY_CLEAR_TASK);
+                            in.putExtra("upper",""+upper);
+                            in.putExtra("lower",""+lower);
+                            getActivity().finish();
+                          //  getActivity().startActivity(in);
+                        }
+                    });
 
                 }
             });

@@ -27,24 +27,24 @@ public class SearchList implements Parcelable {
     public String id;
     public String address;
 
-    public SearchList(String address,String cityName,String countryName,String cityId,
-                        String xid,String id,String stateName)
+    public SearchList(String address,String cityName,String countryName,String stateName,
+                        String xid,String id,String url)
     {
         super();
         this.address = address;
         this.cityName = cityName;
         this.countryName = countryName;
-        this.cityId = cityId;
+        this.stateName = stateName;
         this.xid = xid;
         this.id = id;
-        this.stateName = stateName;
+        this.url = url;
     }
 
     private SearchList(Parcel in) {
         super();
         cityName=in.readString();
         countryName = in.readString();
-        cityId= in.readString();
+        stateName= in.readString();
         xid = in.readString();
         id= in.readString();
         stateName = in.readString();
@@ -60,7 +60,7 @@ public class SearchList implements Parcelable {
 
         dest.writeString( cityName);
         dest.writeString(countryName);
-        dest.writeString(cityId);
+        dest.writeString(stateName);
         dest.writeString(xid);
         dest.writeString(id);
         dest.writeString(stateName);

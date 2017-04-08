@@ -57,7 +57,7 @@ public class SearchPalceAdapter extends BaseAdapter {
         }else{
             mViewHolder =(itemHolder) convertView.getTag();
         }
-        mViewHolder.itemName.setText(searchLists.get(position).countryName);
+        mViewHolder.itemName.setText(searchLists.get(position).cityName+", "+searchLists.get(position).stateName+", "+searchLists.get(position).countryName);
     //    String image = lname.get(position).toLowerCase();
      //   String imageId = image.replace("&","");
 
