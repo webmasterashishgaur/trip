@@ -139,10 +139,11 @@ public class SearchAsyncTask extends AsyncTask<String,Integer,SearchResponse> {
                     xid = jsonObject.getString("xid");
                     id = jsonObject.getString("_id");
                     url = jsonObject.getString("url");
+                    if(!itemList.contains(itemList.get(i).xid)) {
+                        itemList.add(new SearchList(address, cityName, countryName, state, xid, id, url));
+                    }
 
-                    itemList.add(new SearchList(address, cityName, countryName, state, xid, id,   url));
 
-               // }
             }
 
 
