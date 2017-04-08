@@ -3,14 +3,17 @@ package com.ixitrip.chandan.ixigotrip;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
@@ -20,106 +23,68 @@ import com.ixitrip.chandan.ixigotrip.fragment.SearchFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    private TableLayout tabLayout;
-    private ViewPager viewPager;
-    public static  int fragment;
+public class MainActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragment=R.id.myfrag;
-        SearchFragment frag=SearchFragment.newInstance("abc","bcd");
-        getFragmentManager().beginTransaction().replace(fragment, frag).commit();
-//        toolbar = (Toolbar) findViewById(R.id.toolbass);
-//        viewPager = (ViewPager) findViewById(R.id.viewpager);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        setupViewPager(viewPager);
-       // tabLayout = (TableLayout) findViewById(R.id.tabs);
-        //tabLayout.setupWithViewPage(viewPager);
-
+        Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        final ActionBar actionBar=getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        ViewPager viewPager=(ViewPager)findViewById(R.id.viewpager);
+        if(viewPager!=null)
+        {
+            setUpViewPager(viewPager);
+        }
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
-    private void setupViewPager(final ViewPager viewPager) {
-
-
-        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-    //    adapter.addFrag(SearchFragment.newInstance("abc","bcd"),"");
-
+    private void setUpViewPager(ViewPager viewPager)
+    {
+        Adapter adapter=new Adapter(getSupportFragmentManager());
+        adapter.addFragment( SearchFragment.newInstance("abc","bcd"),"Article 1");
         viewPager.setAdapter(adapter);
-
-
-        viewPager.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                Log.d("nano", "mano");
-                //reloading the Database
-
-            }
-        });
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                Log.d("loc", position + "");
-                adapter.notifyDataSetChanged();
-
-            }
-        });
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Log.d("scroll", "mano");
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                Log.d("statechanged", "mano");
-            }
-        });
-
     }
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+       // getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+       /* if (id == R.id.action_settings) {
+            return true;
+        }*/
         return super.onOptionsItemSelected(item);
+    }
+    static class Adapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragments = new ArrayList<>();
+        private final List<String> mFragmentTitles = new ArrayList<>();
+        public Adapter(FragmentManager fm) {
+            super(fm);
+        }
+        public void addFragment(Fragment fragment, String title) {
+            mFragments.add(fragment);
+            mFragmentTitles.add(title);
+        }
+        @Override
+        public Fragment getItem(int position) {
+            return mFragments.get(position);
+        }
+        @Override
+        public int getCount() {
+            return mFragments.size();
+        }
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitles.get(position);
+        }
     }
 }

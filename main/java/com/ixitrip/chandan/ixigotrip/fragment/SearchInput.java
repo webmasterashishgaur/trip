@@ -112,7 +112,7 @@ public class SearchInput extends Fragment {
         frombtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                act.getFragmentManager().beginTransaction().replace(MainActivity.fragment, SearchFragment.newInstance("abc","abc")).commit();
+             //   act.getFragmentManager().beginTransaction().replace(MainActivity.fragment, SearchFragment.newInstance("abc","abc")).commit();
             }
         });
         return rootView;

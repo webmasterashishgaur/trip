@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,13 +60,13 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                act.getFragmentManager().beginTransaction().replace(MainActivity.fragment, SearchInput.newInstance("abc","abc")).commit();
+              //  act.getFragmentManager().beginTransaction().replace(MainActivity.fragment, SearchInput.newInstance("abc","abc")).commit();
             }
         });
         tobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                act.getFragmentManager().beginTransaction().replace(MainActivity.fragment, SearchInput.newInstance("abc","abc")).commit();
+              //  act.getFragmentManager().beginTransaction().replace(MainActivity.fragment, SearchInput.newInstance("abc","abc")).commit();
             }
         });
         return rootView;
