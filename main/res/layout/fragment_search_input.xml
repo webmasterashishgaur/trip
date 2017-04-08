@@ -30,18 +30,17 @@
             />
 
         <Button
-            android:layout_width="40dp"
-            android:layout_height="20dp"
             android:text="X"
             android:id="@+id/close"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
 
-            android:layout_marginBottom="5dp"
-            android:textColor="#fff" />
+            android:textColor="#333"
+            android:layout_height="match_parent"
+            android:textSize="12sp"
+            android:layout_width="40dp" />
     </RelativeLayout>
 
     <RelativeLayout

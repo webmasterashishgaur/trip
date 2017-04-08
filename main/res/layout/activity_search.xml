@@ -15,6 +15,20 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/white" />
     </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main"
+        android:layout_marginTop="40dp">
 
+
+        <FrameLayout
+            android:id="@+id/myfrag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

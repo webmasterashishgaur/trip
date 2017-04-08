@@ -2,8 +2,10 @@ package com.ixitrip.chandan.ixigotrip.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Button;
 
 import com.ixitrip.chandan.ixigotrip.MainActivity;
 import com.ixitrip.chandan.ixigotrip.R;
+import com.ixitrip.chandan.ixigotrip.background.IntentString;
 
 
 public class SearchFragment extends Fragment {
@@ -59,14 +62,15 @@ public class SearchFragment extends Fragment {
         frombtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-              //  act.getFragmentManager().beginTransaction().replace(MainActivity.fragment, SearchInput.newInstance("abc","abc")).commit();
+                Intent in=new Intent(IntentString.SEARCH_ACTVITY);
+                startActivity(in);
             }
         });
         tobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  act.getFragmentManager().beginTransaction().replace(MainActivity.fragment, SearchInput.newInstance("abc","abc")).commit();
+                Intent in=new Intent(IntentString.SEARCH_ACTVITY);
+                startActivity(in);
             }
         });
         return rootView;
@@ -91,8 +95,4 @@ public class SearchFragment extends Fragment {
 
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
