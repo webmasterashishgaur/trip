@@ -3,6 +3,10 @@ package com.ixitrip.chandan.ixigotrip.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,8 +20,12 @@ import com.ixitrip.chandan.ixigotrip.MainActivity;
 import com.ixitrip.chandan.ixigotrip.R;
 import com.ixitrip.chandan.ixigotrip.background.IntentString;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
-public class SearchFragment extends Fragment {
+
+public class SearchFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,10 +67,12 @@ public class SearchFragment extends Fragment {
         View rootView  =inflater.inflate(R.layout.fragment_search, container, false);
         Button frombtn=(Button)rootView.findViewById(R.id.button2);
         Button tobtn=(Button)rootView.findViewById(R.id.button);
+
         frombtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in=new Intent(IntentString.SEARCH_ACTVITY);
+                in.putExtra("from","1");
                 startActivity(in);
             }
         });
@@ -70,6 +80,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent in=new Intent(IntentString.SEARCH_ACTVITY);
+                in.putExtra("from","0");
                 startActivity(in);
             }
         });

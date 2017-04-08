@@ -8,6 +8,7 @@ import com.ixitrip.chandan.ixigotrip.fragment.SearchInput;
 
 public class SearchActivity extends AppCompatActivity {
     public static int fragment;
+    String from;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,6 +16,7 @@ public class SearchActivity extends AppCompatActivity {
         fragment=R.id.myfrag;
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getFragmentManager().beginTransaction().replace(fragment, SearchInput.newInstance("abc","abc")).commit();
+        from=getIntent().getStringExtra("from");
+        getFragmentManager().beginTransaction().replace(fragment, SearchInput.newInstance(""+from,"abc")).commit();
     }
 }
