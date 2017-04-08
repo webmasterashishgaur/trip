@@ -33,13 +33,15 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="40dp"
             android:clickable="true"
-            app:tabBackground="?attr/selectableItemBackground"
+            android:background="@color/purple"
+            app:tabBackground="@drawable/tab_bg"
             app:tabGravity="fill"
             app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@android:color/black" />
+            app:tabIndicatorColor="@android:color/white"
+            app:tabSelectedTextColor="@color/white" />
 
     </android.support.design.widget.AppBarLayout>
 
