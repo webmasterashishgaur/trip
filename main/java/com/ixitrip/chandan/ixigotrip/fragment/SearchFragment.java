@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.ixitrip.chandan.ixigotrip.MainActivity;
 import com.ixitrip.chandan.ixigotrip.R;
@@ -28,14 +29,15 @@ import java.util.Locale;
 public class SearchFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "Select Your City";
+    private static final String ARG_PARAM2 = "Select Traveling City";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     Activity act;
-
+    TextView frombtn;
+    TextView tobtn;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -65,8 +67,9 @@ public class SearchFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView  =inflater.inflate(R.layout.fragment_search, container, false);
-        Button frombtn=(Button)rootView.findViewById(R.id.button2);
-        Button tobtn=(Button)rootView.findViewById(R.id.button);
+        frombtn=(TextView) rootView.findViewById(R.id.textView3);
+       tobtn=(TextView) rootView.findViewById(R.id.textView2);
+        Button searchbtn=(Button) rootView.findViewById(R.id.bSearch);
 
         frombtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +77,14 @@ public class SearchFragment extends Fragment  {
                 Intent in=new Intent(IntentString.SEARCH_ACTVITY);
                 in.putExtra("from","1");
                 startActivity(in);
+            }
+        });
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent in=new Intent(IntentString.SEARCH_ACTVITY);
+//                in.putExtra("from","1");
+//                startActivity(in);
             }
         });
         tobtn.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +95,8 @@ public class SearchFragment extends Fragment  {
                 startActivity(in);
             }
         });
+        frombtn.setText(""+ARG_PARAM1);
+        tobtn.setText(""+ARG_PARAM2);
         return rootView;
 
     }
@@ -97,7 +110,8 @@ public class SearchFragment extends Fragment  {
     public void onAttach(Context context) {
         super.onAttach(context);
         act=(Activity) context;
-
+//        frombtn.setText(""+MainActivity.UPPERSELECTEDPLACE);
+//        frombtn.setText(""+MainActivity.LOWERSELECTEDPLACE);
     }
 
     @Override

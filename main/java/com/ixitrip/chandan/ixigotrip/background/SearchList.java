@@ -13,8 +13,8 @@ public class SearchList implements Parcelable {
     public String countryName;
     String description;
     String howToReach;
-    String cityId;
-    String xid;
+   public String cityId;
+   public String xid;
     String keyImageUrl;
     String whyToVisit;
     String latitude;
@@ -22,10 +22,10 @@ public class SearchList implements Parcelable {
     String minimumPrice;
     String name;
     String url;
-    String stateName;
+    public String stateName;
     String shortDescription;
-    String id;
-    String address;
+    public String id;
+    public String address;
 
     public SearchList(String address,String cityName,String countryName,String cityId,
                         String xid,String id,String stateName)

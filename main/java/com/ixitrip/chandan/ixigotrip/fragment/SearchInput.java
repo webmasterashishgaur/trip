@@ -27,6 +27,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -44,6 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.ixitrip.chandan.ixigotrip.MainActivity;
 import com.ixitrip.chandan.ixigotrip.R;
 import com.ixitrip.chandan.ixigotrip.adapter.SearchPalceAdapter;
+import com.ixitrip.chandan.ixigotrip.background.IntentString;
 import com.ixitrip.chandan.ixigotrip.internetComm.SearchAsyncTask;
 import com.ixitrip.chandan.ixigotrip.response.SearchResponse;
 
@@ -110,26 +112,53 @@ public class SearchInput extends Fragment implements GoogleApiClient.ConnectionC
         Button onmap=(Button)rootView.findViewById(R.id.button4);
         sechinput=(EditText)rootView.findViewById(R.id.editText3) ;
        lv=(ListView)rootView.findViewById(R.id.ListView) ;
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkLocationPermission();
-        }
-        locationManager = (LocationManager) act.getSystemService(ctx.LOCATION_SERVICE);
+        lv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, true);
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(act,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                buildGoogleApiClient();
+                String upper="Select Your City";;
+                String lower="Select Traveling City";
+                if(from.equals("0")) {
+
+                    lower = searchResponse.allocateLists.get(position).address;
+
+                }else {
+                    upper= searchResponse.allocateLists.get(position).address;
+                }
+                Log.d("selectedaddress",""+upper);
+                Intent in=new Intent(IntentString.MAIN_ACTIVITY);
+                in.setFlags(in.FLAG_ACTIVITY_NEW_TASK | in.FLAG_ACTIVITY_CLEAR_TASK);
+                in.putExtra("upper",""+upper);
+                in.putExtra("lower",""+lower);
+                getActivity().finish();
+                startActivity(in);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        }
+        });
+//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            checkLocationPermission();
+//        }
+//        locationManager = (LocationManager) act.getSystemService(ctx.LOCATION_SERVICE);
+//
+//        Criteria criteria = new Criteria();
+//        provider = locationManager.getBestProvider(criteria, true);
+//        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ContextCompat.checkSelfPermission(act,
+//                    Manifest.permission.ACCESS_FINE_LOCATION)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                buildGoogleApiClient();
+//
+//            }
+//        }
 //        if(checkWriteExternalPermission("android.permission.ACCESS_FINE_LOCATION"))
-//        {
-            Log.d("provider","a"+provider);
-            location = locationManager.getLastKnownLocation(provider);
-            Log.d("provider",location+"a"+provider);
+////        {
+//            Log.d("provider","a"+provider);
+//            location = locationManager.getLastKnownLocation(provider);
+//            Log.d("provider",location+"a"+provider);
 //        }else
 //        {
 //            Log.d("providerelse","a"+provider);
@@ -137,41 +166,41 @@ public class SearchInput extends Fragment implements GoogleApiClient.ConnectionC
 //        }
 
 
-        mylocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("click","a"+from);
-                if(from.equals("0"))
-                {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                    builder1.setMessage("You can't select my Location For Destination. ");
-                    builder1.setCancelable(true);
-
-                    builder1.setPositiveButton(
-                            "Ok",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-
-                                    dialog.cancel();
-                                }
-                            });
-
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
-                }else
-                {
-                    if (location != null) {
-                        //System.out.println("Provider " + provider + " has been selected.");
-                        try {
-                            onLocationChanged(location);
-                        }catch (Exception e)
-                        {
-
-                        }
-                    }
-                }
-            }
-        });
+//        mylocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("click","a"+from);
+//                if(from.equals("0"))
+//                {
+//                    AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
+//                    builder1.setMessage("You can't select my Location For Destination. ");
+//                    builder1.setCancelable(true);
+//
+//                    builder1.setPositiveButton(
+//                            "Ok",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int id) {
+//
+//                                    dialog.cancel();
+//                                }
+//                            });
+//
+//                    AlertDialog alert11 = builder1.create();
+//                    alert11.show();
+//                }else
+//                {
+//                    if (location != null) {
+//                        //System.out.println("Provider " + provider + " has been selected.");
+//                        try {
+//                            onLocationChanged(location);
+//                        }catch (Exception e)
+//                        {
+//
+//                        }
+//                    }
+//                }
+//            }
+//        });
         sechinput.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -367,6 +396,7 @@ public class SearchInput extends Fragment implements GoogleApiClient.ConnectionC
                 public void run() {
                     SearchPalceAdapter searchPalceAdapter=new SearchPalceAdapter(ctx,searchResponse.allocateLists);
                     lv.setAdapter(searchPalceAdapter);
+
                 }
             });
         }

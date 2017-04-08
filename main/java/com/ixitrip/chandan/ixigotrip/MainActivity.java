@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity  extends AppCompatActivity {
+    public  String UPPERSELECTEDPLACE="Select Your City";
+    public String LOWERSELECTEDPLACE="Select Traveling City";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +38,17 @@ public class MainActivity  extends AppCompatActivity {
         final ActionBar actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         ViewPager viewPager=(ViewPager)findViewById(R.id.viewpager);
+
         if(viewPager!=null)
         {
             setUpViewPager(viewPager);
+        }
+        try{
+            UPPERSELECTEDPLACE=getIntent().getStringExtra("upper");
+            LOWERSELECTEDPLACE=getIntent().getStringExtra("lower");
+        }catch (Exception e)
+        {
+
         }
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -46,7 +56,7 @@ public class MainActivity  extends AppCompatActivity {
     private void setUpViewPager(ViewPager viewPager)
     {
         Adapter adapter=new Adapter(getSupportFragmentManager());
-        adapter.addFragment( SearchFragment.newInstance("abc","bcd"),"Search");
+        adapter.addFragment( SearchFragment.newInstance(UPPERSELECTEDPLACE,LOWERSELECTEDPLACE),"Search");
         adapter.addFragment( HotelFragment.newInstance("abc","bcd"),"Hotel");
         adapter.addFragment( MapFragment.newInstance("abc","bcd"),"Map");
         adapter.addFragment( MoreFragment.newInstance("abc","bcd"),"More");
@@ -70,6 +80,13 @@ public class MainActivity  extends AppCompatActivity {
         }*/
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
